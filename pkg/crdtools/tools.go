@@ -39,6 +39,7 @@ func UpdateStatus(CRD *CRDConfig, statusPayload string) error {
 	//Logger.Debug(fmt.Sprintf("Watcher Config: #%v ", CRD))
 	clientSet, _ := GetK8SConfig()
 	myPatch := fmt.Sprintf(`{"status":{"status":"%s"}}`, statusPayload)
+	fmt.Println(myPatch)
 	//Logger.Debug(fmt.Sprintf("Watcher Patch: #%v ", myPatch))
 	_, err := clientSet.RESTClient().
 		Patch(api.MergePatchType).
