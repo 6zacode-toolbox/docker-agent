@@ -26,3 +26,22 @@ func ExecuteDockerInfo() (docker.DockerInfo, error) {
 	}
 	return result, nil
 }
+
+func ExecuteDockerPS() ([]docker.DockerContainerSummary, error) {
+	blankObject := []docker.DockerContainerSummary{}
+
+	cmd := exec.Command("/home/app/docker_ps.sh")
+	stdout, err := cmd.Output()
+	fmt.Println(string(stdout))
+	if err != nil {
+		fmt.Println(err.Error())
+		return blankObject, err
+	}
+	fmt.Print(string(stdout))
+	result, err := vo.TranslateToDockerContainerSummarys(stdout)
+	if err != nil {
+		fmt.Println(err.Error())
+		return blankObject, err
+	}
+	return result, nil
+}

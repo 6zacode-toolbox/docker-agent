@@ -15,9 +15,10 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 	fmt.Println(dockerHost)
 
 	dockerInfo, _ := dockerutils.ExecuteDockerInfo()
+	dockerPS, _ := dockerutils.ExecuteDockerPS()
 
 	status := &docker.DockerHostStatus{
-		Containers: []docker.DockerContainerSummary{},
+		Containers: dockerPS,
 		DockerHost: dockerInfo,
 	}
 
