@@ -38,8 +38,8 @@ func GetK8SConfig() (*kubernetes.Clientset, error) {
 func UpdateStatus(CRD *CRDConfig, statusPayload string) error {
 	//Logger.Debug(fmt.Sprintf("Watcher Config: #%v ", CRD))
 	clientSet, _ := GetK8SConfig()
-	myPatch := fmt.Sprintf(`{"status":{"status":"%s"}}`, statusPayload)
-	fmt.Println(myPatch)
+	//myPatch := fmt.Sprintf(`{"status":{"status":"%s"}}`, statusPayload)
+	fmt.Println(statusPayload)
 	//Logger.Debug(fmt.Sprintf("Watcher Patch: #%v ", myPatch))
 	_, err := clientSet.RESTClient().
 		Patch(api.MergePatchType).
@@ -48,7 +48,7 @@ func UpdateStatus(CRD *CRDConfig, statusPayload string) error {
 		Namespace(CRD.Namespace).
 		Resource(CRD.Resource).
 		Name(CRD.InstanceName).
-		Body([]byte(myPatch)).
+		Body([]byte(statusPayload)).
 		DoRaw(context.TODO())
 	if err != nil {
 		//Logger.Info(fmt.Sprintf("Error updating CRD   #%v ", err))

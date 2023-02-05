@@ -8,6 +8,8 @@ An image with drivers to engage with docker host
 go mod init github.com/6zacode-toolbox/docker-agent
 cobra-cli init
 go mod tidy
+
+#Updates Library
 go get github.com/6zacode-toolbox/docker-operator/operator/api/v1
 cobra-cli add test
 go run . test 

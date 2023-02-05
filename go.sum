@@ -38,6 +38,10 @@ cloud.google.com/go/storage v1.10.0/go.mod h1:FLPqc6j+Ki4BU591ie1oL6qBQGu2Bl/tZ9
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
 github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230203200149-7029f90b7762 h1:iBd0YxXIs7kXWLA2lwjInxSs6p92ZBvoNX4G1hkKBV0=
 github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230203200149-7029f90b7762/go.mod h1:qKtpNMrXPDSjN5J4Rkq3c3NJHGNh/P9nKK+f+e+A1u0=
+github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230205013415-71764bdd8f9f h1:hGnBOznTUpxBrHskINtKHNgbRkehK/dkTMTjtCimBT8=
+github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230205013415-71764bdd8f9f/go.mod h1:qKtpNMrXPDSjN5J4Rkq3c3NJHGNh/P9nKK+f+e+A1u0=
+github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230205180252-03c0fcf1ac22 h1:C9OxHLFVpp8wFk00uqruKM6JRcdaOLevnPUq6/0yiVg=
+github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230205180252-03c0fcf1ac22/go.mod h1:qKtpNMrXPDSjN5J4Rkq3c3NJHGNh/P9nKK+f+e+A1u0=
 github.com/Azure/go-autorest v14.2.0+incompatible/go.mod h1:r+4oMnoxhatjLLJ6zxSWATqVooLgysK6ZNox3g/xq24=
 github.com/Azure/go-autorest/autorest v0.11.18/go.mod h1:dSiJPy22c3u0OtOKDNttNgqpNFY/GeWa7GH/Pz56QRA=
 github.com/Azure/go-autorest/autorest/adal v0.9.13/go.mod h1:W/MM4U6nLxnIskrw4UwWzlHfGjwUS50aOsc/I3yuU8M=

@@ -6,6 +6,10 @@ import (
 	docker "github.com/6zacode-toolbox/docker-operator/operator/api/v1"
 )
 
+type WithStatus struct {
+	Status docker.DockerHostStatus `json:"status,omitempty"`
+}
+
 func TranslateToDockerHost(payload []byte) (docker.DockerHost, error) {
 	blankObject := docker.DockerHost{}
 	resultObject := docker.DockerHost{}
@@ -20,7 +24,10 @@ func TranslateToDockerHost(payload []byte) (docker.DockerHost, error) {
 }
 
 func FromDockerHostStatus(object *docker.DockerHostStatus) (string, error) {
-	payload, err := json.Marshal(object)
+	withStatus := WithStatus{
+		Status: *object,
+	}
+	payload, err := json.Marshal(withStatus)
 	if err != nil {
 		return "", err
 	}

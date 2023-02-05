@@ -15,7 +15,7 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 
 	status := &docker.DockerHostStatus{
 		Containers: []docker.DockerContainerSummary{},
-		HostInfo: docker.DockerInfo{
+		DockerHost: docker.DockerInfo{
 			ID: "id",
 		},
 	}
