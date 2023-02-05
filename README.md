@@ -56,6 +56,7 @@ spec:
   containers:
   - name: docker-agent
     image: 6zar/docker-agent:latest
+    imagePullPolicy: Always
     command: ['/home/app/docker-agent', 'agent', '--crd-api-version', 'tool.6zacode-toolbox.github.io/v1', '--crd-namespace', 'default', '--crd-instance', 'dockerhost-sample', '--crd-resource', 'dockerhosts']
 
 ```

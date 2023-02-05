@@ -36,7 +36,7 @@ func GetK8SConfig() (*kubernetes.Clientset, error) {
 }
 
 func UpdateStatus(CRD *CRDConfig, statusPayload string) error {
-	Logger.Debug(fmt.Sprintf("Watcher Config: #%v ", CRD))
+	//Logger.Debug(fmt.Sprintf("Watcher Config: #%v ", CRD))
 	clientSet, _ := GetK8SConfig()
 	myPatch := fmt.Sprintf(`{"status":{"status":"%s"}}`, statusPayload)
 	//Logger.Debug(fmt.Sprintf("Watcher Patch: #%v ", myPatch))
@@ -59,7 +59,7 @@ func UpdateStatus(CRD *CRDConfig, statusPayload string) error {
 
 // GetCRD returns the Watcher CRD Object, used to feed configs
 func GetCRD(CRD *CRDConfig) ([]byte, error) {
-	Logger.Debug(fmt.Sprintf("CRD: #%v ", CRD))
+	//Logger.Debug(fmt.Sprintf("CRD: #%v ", CRD))
 	clientSet, _ := GetK8SConfig()
 	object, _ := clientSet.RESTClient().
 		Get().
