@@ -39,7 +39,7 @@ func UpdateStatus(CRD *CRDConfig, statusPayload string) error {
 	Logger.Debug(fmt.Sprintf("Watcher Config: #%v ", CRD))
 	clientSet, _ := GetK8SConfig()
 	myPatch := fmt.Sprintf(`{"status":{"status":"%s"}}`, statusPayload)
-	Logger.Debug(fmt.Sprintf("Watcher Patch: #%v ", myPatch))
+	//Logger.Debug(fmt.Sprintf("Watcher Patch: #%v ", myPatch))
 	_, err := clientSet.RESTClient().
 		Patch(api.MergePatchType).
 		AbsPath("/apis/" + CRD.APIVersion).
@@ -50,10 +50,10 @@ func UpdateStatus(CRD *CRDConfig, statusPayload string) error {
 		Body([]byte(myPatch)).
 		DoRaw(context.TODO())
 	if err != nil {
-		Logger.Info(fmt.Sprintf("Error updating CRD   #%v ", err))
+		//Logger.Info(fmt.Sprintf("Error updating CRD   #%v ", err))
 		return err
 	}
-	Logger.Info(fmt.Sprintf("Update status:  %#v ", CRD))
+	//Logger.Info(fmt.Sprintf("Update status:  %#v ", CRD))
 	return nil
 }
 
@@ -68,7 +68,7 @@ func GetCRD(CRD *CRDConfig) ([]byte, error) {
 		Resource(CRD.Resource).
 		Name(CRD.InstanceName).
 		DoRaw(context.TODO())
-	Logger.Info(fmt.Sprintf("Get CRD   #%v ", string(object)))
+	//Logger.Info(fmt.Sprintf("Get CRD   #%v ", string(object)))
 	return object, nil
 
 }
