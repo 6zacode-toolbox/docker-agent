@@ -18,3 +18,12 @@ func TranslateToDockerHost(payload []byte) (docker.DockerHost, error) {
 	//client.Logger.Info(fmt.Sprintf("Update status:  %#v ", client.CRD))
 	return resultObject, nil
 }
+
+func FromDockerHostStatus(object *docker.DockerHostStatus) (string, error) {
+	payload, err := json.Marshal(object)
+	if err != nil {
+		return "", err
+	}
+	//client.Logger.Info(fmt.Sprintf("Update status:  %#v ", client.CRD))
+	return string(payload), nil
+}
