@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"log"
 
-	docker "github.com/6zacode-toolbox/docker-operator/operator/api/v1"
+	"github.com/6zacode-toolbox/docker-agent/internal/dockerutils"
 	"github.com/spf13/cobra"
 )
 
@@ -24,9 +24,8 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("test called")
 
-		test := docker.DockerInfo{}
-
-		log.Println(test)
+		result, _ := dockerutils.ExecuteDockerInfo()
+		log.Println(result)
 	},
 }
 

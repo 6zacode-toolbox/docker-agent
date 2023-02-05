@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 
+	"github.com/6zacode-toolbox/docker-agent/internal/dockerutils"
 	"github.com/6zacode-toolbox/docker-agent/internal/vo"
 	"github.com/6zacode-toolbox/docker-agent/pkg/crdtools"
 	docker "github.com/6zacode-toolbox/docker-operator/operator/api/v1"
@@ -13,11 +14,11 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 	dockerHost, _ := vo.TranslateToDockerHost(crdContent)
 	fmt.Println(dockerHost)
 
+	dockerInfo, _ := dockerutils.ExecuteDockerInfo()
+
 	status := &docker.DockerHostStatus{
 		Containers: []docker.DockerContainerSummary{},
-		DockerHost: docker.DockerInfo{
-			ID: "id",
-		},
+		DockerHost: dockerInfo,
 	}
 
 	payload, err := vo.FromDockerHostStatus(status)
