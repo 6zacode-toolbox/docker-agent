@@ -23,6 +23,19 @@ func TranslateToDockerHost(payload []byte) (docker.DockerHost, error) {
 	return resultObject, nil
 }
 
+func TranslateToDockerInfo(payload []byte) (docker.DockerInfo, error) {
+	blankObject := docker.DockerInfo{}
+	resultObject := docker.DockerInfo{}
+	err := json.Unmarshal(payload, &resultObject)
+	//client.Logger.Info(fmt.Sprintf("Watcher   #%v ", watcher))
+	if err != nil {
+		//client.Logger.Info(fmt.Sprintf("Error loading CRD   #%v ", err))
+		return blankObject, err
+	}
+	//client.Logger.Info(fmt.Sprintf("Update status:  %#v ", client.CRD))
+	return resultObject, nil
+}
+
 func FromDockerHostStatus(object *docker.DockerHostStatus) (string, error) {
 	withStatus := WithStatus{
 		Status: *object,

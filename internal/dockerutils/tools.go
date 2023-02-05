@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os/exec"
 
+	"github.com/6zacode-toolbox/docker-agent/internal/vo"
 	docker "github.com/6zacode-toolbox/docker-operator/operator/api/v1"
 )
 
@@ -18,5 +19,10 @@ func ExecuteDockerInfo() (docker.DockerInfo, error) {
 		return blankObject, err
 	}
 	fmt.Print(string(stdout))
-	return blankObject, nil
+	result, err := vo.TranslateToDockerInfo(stdout)
+	if err != nil {
+		fmt.Println(err.Error())
+		return blankObject, err
+	}
+	return result, nil
 }
