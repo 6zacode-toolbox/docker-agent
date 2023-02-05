@@ -10,7 +10,7 @@ import (
 func ExecuteDockerInfo() (docker.DockerInfo, error) {
 	blankObject := docker.DockerInfo{}
 
-	cmd := exec.Command("docker_info.sh")
+	cmd := exec.Command("/home/app/docker_info.sh")
 	stdout, err := cmd.Output()
 	fmt.Println(string(stdout))
 	if err != nil {
