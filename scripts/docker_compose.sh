@@ -6,6 +6,10 @@ echo $COMPOSE_FILE
 echo $REPO_ADDRESS
 echo $EXECUTION_PATH
 echo $GITHUB_TOKEN
+echo $CRD_API_VERSION
+echo $CRD_NAMESPACE
+echo $CRD_NAME
+echo $CRD_RESOURCE
 # "up -d" or "down"
 echo $ACTION 
 

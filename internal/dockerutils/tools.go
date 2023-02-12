@@ -14,12 +14,12 @@ func ExecuteDockerInfo() (docker.DockerInfo, error) {
 
 	cmd := exec.Command("/home/app/docker_info.sh")
 	stdout, err := cmd.Output()
-	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
+	logutils.Logger.Info(string(stdout))
 	if err != nil {
 		logutils.Logger.Error(fmt.Sprintf("%#v", err))
 		return blankObject, err
 	}
-	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
+	logutils.Logger.Info(string(stdout))
 	result, err := vo.TranslateToDockerInfo(stdout)
 	if err != nil {
 		logutils.Logger.Error(fmt.Sprintf("%#v", err))
@@ -33,12 +33,12 @@ func ExecuteDockerPS() ([]docker.DockerContainerSummary, error) {
 
 	cmd := exec.Command("/home/app/docker_ps.sh")
 	stdout, err := cmd.Output()
-	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
+	logutils.Logger.Info(string(stdout))
 	if err != nil {
 		logutils.Logger.Error(fmt.Sprintf("%#v", err))
 		return blankObject, err
 	}
-	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
+	logutils.Logger.Info(string(stdout))
 	result, err := vo.TranslateToDockerContainerSummarys(stdout)
 	if err != nil {
 		logutils.Logger.Error(fmt.Sprintf("%#v", err))
@@ -53,12 +53,12 @@ func ExecuteCompose(runner *docker.DockerComposeRunner) (docker.DockerComposeRun
 	// Controller should provide such variables
 	cmd := exec.Command("/home/app/docker_compose.sh")
 	stdout, err := cmd.Output()
-	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
+	logutils.Logger.Info(string(stdout))
 	if err != nil {
 		logutils.Logger.Error(fmt.Sprintf("%#v", err))
 		return blankObject, err
 	}
-	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
+	logutils.Logger.Info(string(stdout))
 	//result := docker.DockerComposeRunnerStatus{}
 	/*
 		result, err := vo.TranslateToDockerContainerSummarys(stdout)
