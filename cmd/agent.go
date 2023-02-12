@@ -4,9 +4,8 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/6zacode-toolbox/docker-agent/internal/controller"
+	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	"github.com/6zacode-toolbox/docker-agent/pkg/crdtools"
 	"github.com/spf13/cobra"
 )
@@ -29,9 +28,9 @@ var agentCmd = &cobra.Command{
 			InstanceName: crdName,
 			Resource:     crdResource,
 		}
-		fmt.Println("Execute Agent")
+		logutils.Logger.Info("Execute Agent")
 		controller.ExecuteAgent(crdConfig)
-		fmt.Println(crdConfig)
+
 	},
 }
 

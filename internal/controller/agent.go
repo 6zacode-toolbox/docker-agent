@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/6zacode-toolbox/docker-agent/internal/dockerutils"
+	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	"github.com/6zacode-toolbox/docker-agent/internal/vo"
 	"github.com/6zacode-toolbox/docker-agent/pkg/crdtools"
 	docker "github.com/6zacode-toolbox/docker-operator/operator/api/v1"
@@ -12,7 +13,7 @@ import (
 func ExecuteAgent(crd *crdtools.CRDConfig) error {
 	crdContent, _ := crdtools.GetCRD(crd)
 	dockerHost, _ := vo.TranslateToDockerHost(crdContent)
-	fmt.Println(dockerHost)
+	logutils.Logger.Info(fmt.Sprintf("%#v", dockerHost))
 
 	dockerInfo, _ := dockerutils.ExecuteDockerInfo()
 	dockerPS, _ := dockerutils.ExecuteDockerPS()
@@ -24,7 +25,7 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 
 	payload, err := vo.FromDockerHostStatus(status)
 	if err != nil {
-		fmt.Println("Error parsing to string")
+		logutils.Logger.Info("Error parsing to string")
 		return err
 	}
 	crdtools.UpdateStatus(crd, payload)
@@ -34,21 +35,21 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 func ExecuteDockerComposeRunner(crd *crdtools.CRDConfig) error {
 	crdContent, _ := crdtools.GetCRD(crd)
 	composeRunner, _ := vo.TranslateToDockerComposeRunner(crdContent)
-	fmt.Println(composeRunner)
+	logutils.Logger.Info(fmt.Sprintf("%#v", composeRunner))
 
 	// Do something
 	// Execute Logic
 	dockerRunner, err := dockerutils.ExecuteCompose(&composeRunner)
 	if err != nil {
-		fmt.Println("Error executing command")
+		logutils.Logger.Info("Error executing command")
 		return err
 	}
-	fmt.Println(dockerRunner)
+	logutils.Logger.Info(fmt.Sprintf("%#v", dockerRunner))
 	status := &docker.DockerComposeRunnerStatus{}
 
 	payload, err := vo.FromDockerComposeRunnerStatus(status)
 	if err != nil {
-		fmt.Println("Error parsing to string")
+		logutils.Logger.Info("Error parsing to string")
 		return err
 	}
 	crdtools.UpdateStatus(crd, payload)
