@@ -1,5 +1,6 @@
 #!/bin/sh
 
+docker ps
 #docker compose ls --format json > /var/tmp/before.json
 echo $DOCKER_HOST
 echo $COMPOSE_FILE
@@ -16,9 +17,12 @@ echo $ACTION
 # TODO: ADD support to branch
 # I may need the user to clone it
 # use single branch to save space
-#git clone https://[TOKEN]@github.com/[REPO-OWNER]/[REPO-NAME] app
+git clone https://$GITHUB_TOKEN@$REPO_ADDRESS app
 # cd $EXECUTION_PATH
-# docker compose -f $COMPOSE_FILE $ACTION
-	
+cd app
+docker compose -f $COMPOSE_FILE $ACTION
+sleep 10
+docker ps	
 sleep 60
+
 #docker compose ls --format json > /var/tmp/after.json
