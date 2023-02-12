@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os/exec"
 
+	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	"github.com/6zacode-toolbox/docker-agent/internal/vo"
 	docker "github.com/6zacode-toolbox/docker-operator/operator/api/v1"
 )
@@ -13,15 +14,15 @@ func ExecuteDockerInfo() (docker.DockerInfo, error) {
 
 	cmd := exec.Command("/home/app/docker_info.sh")
 	stdout, err := cmd.Output()
-	fmt.Println(string(stdout))
+	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
 	if err != nil {
-		fmt.Println(err.Error())
+		logutils.Logger.Error(fmt.Sprintf("%#v", err))
 		return blankObject, err
 	}
-	fmt.Print(string(stdout))
+	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
 	result, err := vo.TranslateToDockerInfo(stdout)
 	if err != nil {
-		fmt.Println(err.Error())
+		logutils.Logger.Error(fmt.Sprintf("%#v", err))
 		return blankObject, err
 	}
 	return result, nil
@@ -32,15 +33,15 @@ func ExecuteDockerPS() ([]docker.DockerContainerSummary, error) {
 
 	cmd := exec.Command("/home/app/docker_ps.sh")
 	stdout, err := cmd.Output()
-	fmt.Println(string(stdout))
+	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
 	if err != nil {
-		fmt.Println(err.Error())
+		logutils.Logger.Error(fmt.Sprintf("%#v", err))
 		return blankObject, err
 	}
-	fmt.Print(string(stdout))
+	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
 	result, err := vo.TranslateToDockerContainerSummarys(stdout)
 	if err != nil {
-		fmt.Println(err.Error())
+		logutils.Logger.Error(fmt.Sprintf("%#v", err))
 		return blankObject, err
 	}
 	return result, nil
@@ -52,20 +53,20 @@ func ExecuteCompose(runner *docker.DockerComposeRunner) (docker.DockerComposeRun
 	// Controller should provide such variables
 	cmd := exec.Command("/home/app/docker_compose.sh")
 	stdout, err := cmd.Output()
-	fmt.Println(string(stdout))
+	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
 	if err != nil {
-		fmt.Println(err.Error())
+		logutils.Logger.Error(fmt.Sprintf("%#v", err))
 		return blankObject, err
 	}
-	fmt.Print(string(stdout))
-	result := docker.DockerComposeRunnerStatus{}
+	logutils.Logger.Info(fmt.Sprintf("%#v", stdout))
+	//result := docker.DockerComposeRunnerStatus{}
 	/*
 		result, err := vo.TranslateToDockerContainerSummarys(stdout)
 		if err != nil {
-			fmt.Println(err.Error())
+			logutils.Logger.Error(fmt.Sprintf("%#v",err))
 			return blankObject, err
 		}
 	*/
-	return result, nil
+	return blankObject, nil
 
 }

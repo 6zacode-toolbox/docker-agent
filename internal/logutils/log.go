@@ -21,3 +21,7 @@ func InitializeLogger() {
 	Logger = myLogger
 	Logger.Debug("Logger ready")
 }
+
+func init() {
+	InitializeLogger()
+}

@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	"go.uber.org/zap"
 	api "k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/kubernetes"
@@ -30,7 +31,7 @@ func GetK8SConfig() (*kubernetes.Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("Config used")
+	logutils.Logger.Info("Config used")
 	return clientSet, nil
 
 }
@@ -39,7 +40,7 @@ func UpdateStatus(CRD *CRDConfig, statusPayload string) error {
 	//Logger.Debug(fmt.Sprintf("Watcher Config: #%v ", CRD))
 	clientSet, _ := GetK8SConfig()
 	//myPatch := fmt.Sprintf(`{"status":{"status":"%s"}}`, statusPayload)
-	fmt.Println(statusPayload)
+	logutils.Logger.Info(fmt.Sprintf("%#v", statusPayload))
 	//Logger.Debug(fmt.Sprintf("Watcher Patch: #%v ", myPatch))
 	_, err := clientSet.RESTClient().
 		Patch(api.MergePatchType).

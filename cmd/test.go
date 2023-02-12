@@ -5,9 +5,9 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/6zacode-toolbox/docker-agent/internal/dockerutils"
+	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	"github.com/spf13/cobra"
 )
 
@@ -22,13 +22,15 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("test called")
+		logutils.Logger.Info("test called")
 
 		result, _ := dockerutils.ExecuteDockerInfo()
-		log.Println(result)
+		logutils.Logger.Info(fmt.Sprintf("%#v", result))
 	},
 }
 
+// logutils.Logger.Info(
+// logutils.Logger.Info(fmt.Sprintf("%#v",
 func init() {
 	rootCmd.AddCommand(testCmd)
 
