@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker compose ls --format json > /var/tmp/before.json
+#docker compose ls --format json > /var/tmp/before.json
 echo $DOCKER_HOST
 echo $COMPOSE_FILE
 echo $REPO_ADDRESS
@@ -20,5 +20,5 @@ echo $ACTION
 # cd $EXECUTION_PATH
 # docker compose -f $COMPOSE_FILE $ACTION
 	
-
-docker compose ls --format json > /var/tmp/after.json
+sleep 60
+#docker compose ls --format json > /var/tmp/after.json

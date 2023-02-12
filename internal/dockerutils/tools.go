@@ -55,7 +55,7 @@ func ExecuteCompose(runner *docker.DockerComposeRunner) (docker.DockerComposeRun
 	stdout, err := cmd.Output()
 	logutils.Logger.Info(string(stdout))
 	if err != nil {
-		logutils.Logger.Error(fmt.Sprintf("%#v", err))
+		logutils.Logger.Error(err.Error())
 		return blankObject, err
 	}
 	logutils.Logger.Info(string(stdout))
