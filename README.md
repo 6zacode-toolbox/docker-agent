@@ -30,7 +30,7 @@ metadata:
   name: docker-agent-cr
 rules:
 - apiGroups: ["tool.6zacode-toolbox.github.io"]
-  resources: ["dockerhosts", "dockerhosts/status"]
+  resources: ["dockerhosts", "dockerhosts/status", "dockercomposerunners", "dockercomposerunners/status"]
   verbs: ["*"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
