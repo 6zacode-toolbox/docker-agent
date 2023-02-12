@@ -2,6 +2,7 @@ package dockerutils
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
 
 	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
@@ -59,14 +60,20 @@ func ExecuteCompose(runner *docker.DockerComposeRunner) (docker.DockerComposeRun
 		return blankObject, err
 	}
 	logutils.Logger.Info(string(stdout))
-	//result := docker.DockerComposeRunnerStatus{}
-	/*
-		result, err := vo.TranslateToDockerContainerSummarys(stdout)
-		if err != nil {
-			logutils.Logger.Error(fmt.Sprintf("%#v",err))
-			return blankObject, err
-		}
-	*/
-	return blankObject, nil
+	startComposeStatus, err := os.ReadFile("/var/tmp/after.json")
+	if err != nil {
+		logutils.Logger.Error(err.Error())
+		return blankObject, err
+	}
+	logutils.Logger.Info(string(startComposeStatus))
+	arrayResult, err := vo.TranslateToComposeStatusArray(startComposeStatus)
+	if err != nil {
+		logutils.Logger.Error(err.Error())
+		return blankObject, err
+	}
+	result := docker.DockerComposeRunnerStatus{
+		ComposeStatus: arrayResult,
+	}
+	return result, nil
 
 }

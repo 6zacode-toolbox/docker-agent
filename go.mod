@@ -3,7 +3,7 @@ module github.com/6zacode-toolbox/docker-agent
 go 1.18
 
 require (
-	github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230210000557-7088eea7bf02
+	github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230212224345-bc50bdf3367b
 	github.com/spf13/cobra v1.6.1
 	go.uber.org/zap v1.24.0
 	k8s.io/apimachinery v0.26.0
