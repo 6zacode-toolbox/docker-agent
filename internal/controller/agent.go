@@ -30,3 +30,27 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 	crdtools.UpdateStatus(crd, payload)
 	return nil
 }
+
+func ExecuteDockerComposeRunner(crd *crdtools.CRDConfig) error {
+	crdContent, _ := crdtools.GetCRD(crd)
+	composeRunner, _ := vo.TranslateToDockerComposeRunner(crdContent)
+	fmt.Println(composeRunner)
+
+	// Do something
+	// Execute Logic
+	dockerRunner, err := dockerutils.ExecuteCompose(&composeRunner)
+	if err != nil {
+		fmt.Println("Error executing command")
+		return err
+	}
+	fmt.Println(dockerRunner)
+	status := &docker.DockerComposeRunnerStatus{}
+
+	payload, err := vo.FromDockerComposeRunnerStatus(status)
+	if err != nil {
+		fmt.Println("Error parsing to string")
+		return err
+	}
+	crdtools.UpdateStatus(crd, payload)
+	return nil
+}

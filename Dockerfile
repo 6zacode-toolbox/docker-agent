@@ -11,7 +11,7 @@ RUN  mv ./docker-agent /usr/local/bin/ && chmod 777 /usr/local/bin/docker-agent
 
 
 FROM docker:23.0.0
-RUN apk --no-cache add ca-certificates jq
+RUN apk --no-cache add ca-certificates jq git
 USER root
 WORKDIR /home/app/
 # setup user

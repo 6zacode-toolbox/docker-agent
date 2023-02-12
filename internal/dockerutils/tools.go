@@ -45,3 +45,27 @@ func ExecuteDockerPS() ([]docker.DockerContainerSummary, error) {
 	}
 	return result, nil
 }
+
+func ExecuteCompose(runner *docker.DockerComposeRunner) (docker.DockerComposeRunnerStatus, error) {
+	blankObject := docker.DockerComposeRunnerStatus{}
+	// Setup variables for SHELL that are not already on the pod by the controller
+	// Controller should provide such variables
+	cmd := exec.Command("/home/app/docker_compose.sh")
+	stdout, err := cmd.Output()
+	fmt.Println(string(stdout))
+	if err != nil {
+		fmt.Println(err.Error())
+		return blankObject, err
+	}
+	fmt.Print(string(stdout))
+	result := docker.DockerComposeRunnerStatus{}
+	/*
+		result, err := vo.TranslateToDockerContainerSummarys(stdout)
+		if err != nil {
+			fmt.Println(err.Error())
+			return blankObject, err
+		}
+	*/
+	return result, nil
+
+}
