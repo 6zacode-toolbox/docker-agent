@@ -25,10 +25,12 @@ type CRDConfig struct {
 func GetK8SConfig() (*kubernetes.Clientset, error) {
 	config, err := rest.InClusterConfig()
 	if err != nil {
+		logutils.Logger.Error(err.Error())
 		return nil, err
 	}
 	clientSet, err := kubernetes.NewForConfig(config)
 	if err != nil {
+		logutils.Logger.Error(err.Error())
 		return nil, err
 	}
 	logutils.Logger.Info("Config used")
@@ -52,7 +54,7 @@ func UpdateStatus(CRD *CRDConfig, statusPayload string) error {
 		Body([]byte(statusPayload)).
 		DoRaw(context.TODO())
 	if err != nil {
-		//Logger.Info(fmt.Sprintf("Error updating CRD   #%v ", err))
+		logutils.Logger.Error(err.Error())
 		return err
 	}
 	//Logger.Info(fmt.Sprintf("Update status:  %#v ", CRD))
@@ -62,7 +64,10 @@ func UpdateStatus(CRD *CRDConfig, statusPayload string) error {
 // GetCRD returns the Watcher CRD Object, used to feed configs
 func GetCRD(CRD *CRDConfig) ([]byte, error) {
 	//Logger.Debug(fmt.Sprintf("CRD: #%v ", CRD))
-	clientSet, _ := GetK8SConfig()
+	clientSet, err := GetK8SConfig()
+	if err != nil {
+		logutils.Logger.Error(err.Error())
+	}
 	object, _ := clientSet.RESTClient().
 		Get().
 		AbsPath("/apis/" + CRD.APIVersion).

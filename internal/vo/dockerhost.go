@@ -3,6 +3,7 @@ package vo
 import (
 	"encoding/json"
 
+	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	docker "github.com/6zacode-toolbox/docker-operator/operator/api/v1"
 )
 
@@ -12,7 +13,7 @@ func TranslateToDockerHost(payload []byte) (docker.DockerHost, error) {
 	err := json.Unmarshal(payload, &resultObject)
 	//client.Logger.Info(fmt.Sprintf("Watcher   #%v ", watcher))
 	if err != nil {
-		//client.Logger.Info(fmt.Sprintf("Error loading CRD   #%v ", err))
+		logutils.Logger.Error(err.Error())
 		return blankObject, err
 	}
 	//client.Logger.Info(fmt.Sprintf("Update status:  %#v ", client.CRD))
@@ -25,7 +26,7 @@ func TranslateToDockerInfo(payload []byte) (docker.DockerInfo, error) {
 	err := json.Unmarshal(payload, &resultObject)
 	//client.Logger.Info(fmt.Sprintf("Watcher   #%v ", watcher))
 	if err != nil {
-		//client.Logger.Info(fmt.Sprintf("Error loading CRD   #%v ", err))
+		logutils.Logger.Error(err.Error())
 		return blankObject, err
 	}
 	//client.Logger.Info(fmt.Sprintf("Update status:  %#v ", client.CRD))
@@ -38,7 +39,7 @@ func TranslateToDockerContainerSummarys(payload []byte) ([]docker.DockerContaine
 	err := json.Unmarshal(payload, &resultObject)
 	//client.Logger.Info(fmt.Sprintf("Watcher   #%v ", watcher))
 	if err != nil {
-		//client.Logger.Info(fmt.Sprintf("Error loading CRD   #%v ", err))
+		logutils.Logger.Error(err.Error())
 		return blankObject, err
 	}
 	//client.Logger.Info(fmt.Sprintf("Update status:  %#v ", client.CRD))
@@ -54,6 +55,7 @@ func FromDockerHostStatus(object *docker.DockerHostStatus) (string, error) {
 	}
 	payload, err := json.Marshal(withStatus)
 	if err != nil {
+		logutils.Logger.Error(err.Error())
 		return "", err
 	}
 	//client.Logger.Info(fmt.Sprintf("Update status:  %#v ", client.CRD))

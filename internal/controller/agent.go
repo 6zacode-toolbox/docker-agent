@@ -25,7 +25,7 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 
 	payload, err := vo.FromDockerHostStatus(status)
 	if err != nil {
-		logutils.Logger.Info("Error parsing to string")
+		logutils.Logger.Error(err.Error())
 		return err
 	}
 	crdtools.UpdateStatus(crd, payload)
@@ -33,20 +33,28 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 }
 
 func ExecuteDockerComposeRunner(crd *crdtools.CRDConfig) error {
-	crdContent, _ := crdtools.GetCRD(crd)
-	composeRunner, _ := vo.TranslateToDockerComposeRunner(crdContent)
+	crdContent, err := crdtools.GetCRD(crd)
+	if err != nil {
+		logutils.Logger.Error(err.Error())
+		return err
+	}
+	composeRunner, err := vo.TranslateToDockerComposeRunner(crdContent)
+	if err != nil {
+		logutils.Logger.Error(err.Error())
+		return err
+	}
 	logutils.Logger.Info(fmt.Sprintf("%#v", composeRunner))
 
 	// Do something
 	// Execute Logic
 	dockerRunnerStatus, err := dockerutils.ExecuteCompose(&composeRunner)
 	if err != nil {
-		logutils.Logger.Info("Error executing command")
+		logutils.Logger.Error(err.Error())
 		return err
 	}
 	payload, err := vo.FromDockerComposeRunnerStatus(&dockerRunnerStatus)
 	if err != nil {
-		logutils.Logger.Info("Error parsing to string")
+		logutils.Logger.Error(err.Error())
 		return err
 	}
 	crdtools.UpdateStatus(crd, payload)
