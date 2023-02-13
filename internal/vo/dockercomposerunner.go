@@ -2,6 +2,7 @@ package vo
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	docker "github.com/6zacode-toolbox/docker-operator/operator/api/v1"
@@ -15,12 +16,11 @@ func TranslateToDockerComposeRunner(payload []byte) (docker.DockerComposeRunner,
 	blankObject := docker.DockerComposeRunner{}
 	resultObject := docker.DockerComposeRunner{}
 	err := json.Unmarshal(payload, &resultObject)
-	//client.Logger.Info(fmt.Sprintf("Watcher   #%v ", watcher))
+	logutils.Logger.Info(fmt.Sprintf("%#v", resultObject))
 	if err != nil {
 		logutils.Logger.Error(err.Error())
 		return blankObject, err
 	}
-	//client.Logger.Info(fmt.Sprintf("Update status:  %#v ", client.CRD))
 	return resultObject, nil
 }
 

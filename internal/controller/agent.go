@@ -34,11 +34,13 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 
 func ExecuteDockerComposeRunner(crd *crdtools.CRDConfig) error {
 	crdContent, err := crdtools.GetCRD(crd)
+	logutils.Logger.Info(fmt.Sprintf("%#v", crdContent))
 	if err != nil {
 		logutils.Logger.Error(err.Error())
 		return err
 	}
 	composeRunner, err := vo.TranslateToDockerComposeRunner(crdContent)
+	logutils.Logger.Info(fmt.Sprintf("%#v", composeRunner))
 	if err != nil {
 		logutils.Logger.Error(err.Error())
 		return err
