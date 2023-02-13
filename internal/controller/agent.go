@@ -34,7 +34,7 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 
 func ExecuteDockerComposeRunner(crd *crdtools.CRDConfig) error {
 	crdContent, err := crdtools.GetCRD(crd)
-	logutils.Logger.Info(fmt.Sprintf("%#v", crdContent))
+	logutils.Logger.Info(string(crdContent))
 	if err != nil {
 		logutils.Logger.Error(err.Error())
 		return err

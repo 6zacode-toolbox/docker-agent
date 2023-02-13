@@ -34,7 +34,7 @@ func init() {
 	composeRunnerCmd.Flags().StringVar(&crdAPIVersion, "crd-api-version", "tool.6zacode-toolbox.github.io/v1", `CRD API Version.`)
 	composeRunnerCmd.Flags().StringVar(&crdNamespace, "crd-namespace", "default", `CRD Namespace.`)
 	composeRunnerCmd.Flags().StringVar(&crdName, "crd-instance", "", `CRD instance name. Mandatory in CRD mode.`)
-	composeRunnerCmd.Flags().StringVar(&crdResource, "crd-resource", "dockerhosts", `CRD Resource name`)
+	composeRunnerCmd.Flags().StringVar(&crdResource, "crd-resource", "dockercomposerunners", `CRD Resource name`)
 
 	rootCmd.AddCommand(composeRunnerCmd)
 }

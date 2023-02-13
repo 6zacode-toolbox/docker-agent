@@ -13,6 +13,7 @@ type WithStatus struct {
 }
 
 func TranslateToDockerComposeRunner(payload []byte) (docker.DockerComposeRunner, error) {
+	logutils.Logger.Info(string(payload))
 	blankObject := docker.DockerComposeRunner{}
 	resultObject := docker.DockerComposeRunner{}
 	err := json.Unmarshal(payload, &resultObject)
