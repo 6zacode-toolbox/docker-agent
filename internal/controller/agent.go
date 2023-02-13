@@ -39,15 +39,12 @@ func ExecuteDockerComposeRunner(crd *crdtools.CRDConfig) error {
 
 	// Do something
 	// Execute Logic
-	dockerRunner, err := dockerutils.ExecuteCompose(&composeRunner)
+	dockerRunnerStatus, err := dockerutils.ExecuteCompose(&composeRunner)
 	if err != nil {
 		logutils.Logger.Info("Error executing command")
 		return err
 	}
-	logutils.Logger.Info(fmt.Sprintf("%#v", dockerRunner))
-	status := &docker.DockerComposeRunnerStatus{}
-
-	payload, err := vo.FromDockerComposeRunnerStatus(status)
+	payload, err := vo.FromDockerComposeRunnerStatus(&dockerRunnerStatus)
 	if err != nil {
 		logutils.Logger.Info("Error parsing to string")
 		return err
