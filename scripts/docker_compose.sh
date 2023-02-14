@@ -16,8 +16,7 @@ git clone https://$GITHUB_TOKEN@$REPO_ADDRESS app
 cd app
 docker compose ls --format json > /var/tmp/before.json
 docker compose -f $COMPOSE_FILE $ACTION
-sleep 10
-docker ps	
-sleep 60
+sleep 3
+#sleep 60
 cat /var/tmp/before.json
 docker compose ls --format json > /var/tmp/after.json
