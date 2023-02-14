@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"reflect"
 
 	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	"github.com/6zacode-toolbox/docker-agent/internal/vo"
@@ -74,13 +73,20 @@ func ExecuteCompose(runner *docker.DockerComposeRunner) (docker.DockerComposeRun
 		return blankObject, err
 	}
 
-	mappingBefore := funk.ToMap(beforeStatus, "ConfigFiles")
-	keysBefore := reflect.ValueOf(mappingBefore).MapKeys()
+	//mappingBefore := funk.ToMap(beforeStatus, "ConfigFiles")
+	//keysBefore := reflect.ValueOf(mappingBefore).MapKeys()
+	var oldStatus []string
+	for _, v := range beforeStatus {
+		oldStatus = append(oldStatus, v.Name)
+	}
+
 	var newStatus []docker.ComposeStatus
+	logutils.Logger.Info(fmt.Sprintf("keysBefore: %#v", oldStatus))
 	for _, v := range afterStatus {
-		if !funk.Contains(keysBefore, v.ConfigFiles) {
+		logutils.Logger.Info(fmt.Sprintf("v.ConfigFiles: %#v", v.Name))
+		if !funk.Contains(oldStatus, v.Name) {
 			newStatus = append(newStatus, v)
-			logutils.Logger.Info(fmt.Sprintf("%#v", v))
+			logutils.Logger.Info(fmt.Sprintf("newStatus: %#v", v))
 		}
 
 	}
