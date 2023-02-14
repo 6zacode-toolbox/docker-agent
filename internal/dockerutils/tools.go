@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"reflect"
 
 	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	"github.com/6zacode-toolbox/docker-agent/internal/vo"
 	docker "github.com/6zacode-toolbox/docker-operator/operator/api/v1"
+	funk "github.com/thoas/go-funk"
 )
 
 func ExecuteDockerInfo() (docker.DockerInfo, error) {
@@ -60,20 +62,47 @@ func ExecuteCompose(runner *docker.DockerComposeRunner) (docker.DockerComposeRun
 		return blankObject, err
 	}
 	logutils.Logger.Info(string(stdout))
-	startComposeStatus, err := os.ReadFile("/var/tmp/after.json")
+	beforeStatus, err := ReadComposeStatus("/var/tmp/before.json")
 	if err != nil {
 		logutils.Logger.Error(err.Error())
 		return blankObject, err
 	}
-	logutils.Logger.Info(string(startComposeStatus))
-	arrayResult, err := vo.TranslateToComposeStatusArray(startComposeStatus)
+
+	afterStatus, err := ReadComposeStatus("/var/tmp/after.json")
 	if err != nil {
 		logutils.Logger.Error(err.Error())
 		return blankObject, err
 	}
+
+	mappingBefore := funk.ToMap(beforeStatus, "ConfigFiles")
+	keysBefore := reflect.ValueOf(mappingBefore).MapKeys()
+	var newStatus []docker.ComposeStatus
+	for _, v := range afterStatus {
+		if !funk.Contains(keysBefore, v.ConfigFiles) {
+			newStatus = append(newStatus, v)
+			logutils.Logger.Info(fmt.Sprintf("%#v", v))
+		}
+
+	}
+
 	result := docker.DockerComposeRunnerStatus{
-		ComposeStatus: arrayResult,
+		ComposeStatus: newStatus,
 	}
 	return result, nil
 
+}
+
+func ReadComposeStatus(file string) ([]docker.ComposeStatus, error) {
+	afterComposeStatus, err := os.ReadFile(file)
+	if err != nil {
+		logutils.Logger.Error(err.Error())
+		return nil, err
+	}
+	logutils.Logger.Info(string(afterComposeStatus))
+	status, err := vo.TranslateToComposeStatusArray(afterComposeStatus)
+	if err != nil {
+		logutils.Logger.Error(err.Error())
+		return nil, err
+	}
+	return status, nil
 }

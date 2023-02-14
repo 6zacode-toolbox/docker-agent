@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230213005503-7f5de6aaa523
 	github.com/spf13/cobra v1.6.1
+	github.com/thoas/go-funk v0.9.3
 	go.uber.org/zap v1.24.0
 	k8s.io/apimachinery v0.26.0
 	k8s.io/client-go v0.26.0
