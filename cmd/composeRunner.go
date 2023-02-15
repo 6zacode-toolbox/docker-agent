@@ -9,6 +9,7 @@ import (
 	"github.com/6zacode-toolbox/docker-agent/internal/controller"
 	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	"github.com/6zacode-toolbox/docker-agent/pkg/crdtools"
+	docker "github.com/6zacode-toolbox/docker-operator/operator/api/v1"
 	"github.com/spf13/cobra"
 )
 
@@ -27,7 +28,7 @@ var composeRunnerCmd = &cobra.Command{
 		}
 		logutils.Logger.Info("Execute Agent")
 		logutils.Logger.Info(crdConfig.APIVersion)
-		if os.Getenv("ACTION") == "down" {
+		if os.Getenv("ACTION") == docker.COMPOSE_ACTION_DOWN {
 			controller.ExecuteDockerComposeRunnerDown(crdConfig)
 		} else {
 			controller.ExecuteDockerComposeRunnerUp(crdConfig)

@@ -38,6 +38,8 @@ cloud.google.com/go/storage v1.10.0/go.mod h1:FLPqc6j+Ki4BU591ie1oL6qBQGu2Bl/tZ9
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
 github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230213005503-7f5de6aaa523 h1:aFCFr6OwxzWw+CfotK4dYc+uK9xYUE+vtPLn1rIaB8A=
 github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230213005503-7f5de6aaa523/go.mod h1:G8oCZmYx59A4pMvl/8Rfn21RolPmyHc/1P0VVp4uhl4=
+github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230215232714-51a0bf4547cc h1:rrHBgx9AREkUqUQQvPcrJCFUuMCcUU+SUY2PECKBACE=
+github.com/6zacode-toolbox/docker-operator/operator v0.0.0-20230215232714-51a0bf4547cc/go.mod h1:G8oCZmYx59A4pMvl/8Rfn21RolPmyHc/1P0VVp4uhl4=
 github.com/Azure/go-autorest v14.2.0+incompatible/go.mod h1:r+4oMnoxhatjLLJ6zxSWATqVooLgysK6ZNox3g/xq24=
 github.com/Azure/go-autorest/autorest v0.11.18/go.mod h1:dSiJPy22c3u0OtOKDNttNgqpNFY/GeWa7GH/Pz56QRA=
 github.com/Azure/go-autorest/autorest/adal v0.9.13/go.mod h1:W/MM4U6nLxnIskrw4UwWzlHfGjwUS50aOsc/I3yuU8M=
