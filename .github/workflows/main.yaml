@@ -11,6 +11,22 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        # list of Docker images to use as base name for tags
+        images: |
+          ${{ secrets.DOCKER_USER }}/docker-operator
+        # generate Docker tags based on the following events/attributes
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
+          type=sha
+          type=raw,value=latest
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
     - name: Set up Docker Buildx
@@ -26,6 +42,9 @@ jobs:
         context: .
         push: true
         platforms: linux/amd64,linux/arm64/v8
-        tags: ${{ secrets.DOCKER_USER }}/docker-agent:latest
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=registry,ref=${{ secrets.DOCKER_USER }}/docker-agent:latest
+        cache-to: type=inline
 
 
