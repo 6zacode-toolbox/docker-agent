@@ -7,6 +7,7 @@ import (
 	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	"github.com/6zacode-toolbox/docker-agent/internal/vo"
 	"github.com/6zacode-toolbox/docker-agent/pkg/crdtools"
+	"github.com/6zacode-toolbox/docker-agent/pkg/k8s"
 	docker "github.com/6zacode-toolbox/docker-operator/operator/api/v1"
 )
 
@@ -66,6 +67,11 @@ func ExecuteDockerComposeRunnerUp(crd *crdtools.CRDConfig) error {
 func ExecuteDockerComposeRunnerDown(crd *crdtools.CRDConfig) error {
 	// Execute Logic
 	_, err := dockerutils.ExecuteCompose()
+	if err != nil {
+		logutils.Logger.Error(err.Error())
+		return err
+	}
+	err = k8s.DeleteConfigMap(crd)
 	if err != nil {
 		logutils.Logger.Error(err.Error())
 		return err
