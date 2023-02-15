@@ -1,4 +1,4 @@
-FROM cgr.dev/chainguard/go:1.19
+FROM golang:1.19
 RUN apt-get update && \
     apt-get install -y unzip curl jq vim unzip less \
      && rm -rf /var/lib/apt/lists/* 
