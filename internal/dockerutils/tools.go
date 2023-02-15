@@ -49,7 +49,7 @@ func ExecuteDockerPS() ([]docker.DockerContainerSummary, error) {
 	return result, nil
 }
 
-func ExecuteCompose(runner *docker.DockerComposeRunner) (docker.DockerComposeRunnerStatus, error) {
+func ExecuteCompose() (docker.DockerComposeRunnerStatus, error) {
 	blankObject := docker.DockerComposeRunnerStatus{}
 	// Setup variables for SHELL that are not already on the pod by the controller
 	// Controller should provide such variables

@@ -32,7 +32,7 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 	return nil
 }
 
-func ExecuteDockerComposeRunner(crd *crdtools.CRDConfig) error {
+func ExecuteDockerComposeRunnerUp(crd *crdtools.CRDConfig) error {
 	crdContent, err := crdtools.GetCRD(crd)
 	logutils.Logger.Info(string(crdContent))
 	if err != nil {
@@ -49,7 +49,7 @@ func ExecuteDockerComposeRunner(crd *crdtools.CRDConfig) error {
 
 	// Do something
 	// Execute Logic
-	dockerRunnerStatus, err := dockerutils.ExecuteCompose(&composeRunner)
+	dockerRunnerStatus, err := dockerutils.ExecuteCompose()
 	if err != nil {
 		logutils.Logger.Error(err.Error())
 		return err
@@ -60,5 +60,15 @@ func ExecuteDockerComposeRunner(crd *crdtools.CRDConfig) error {
 		return err
 	}
 	crdtools.UpdateStatus(crd, payload)
+	return nil
+}
+
+func ExecuteDockerComposeRunnerDown(crd *crdtools.CRDConfig) error {
+	// Execute Logic
+	_, err := dockerutils.ExecuteCompose()
+	if err != nil {
+		logutils.Logger.Error(err.Error())
+		return err
+	}
 	return nil
 }

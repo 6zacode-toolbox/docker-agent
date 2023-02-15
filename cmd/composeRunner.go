@@ -4,6 +4,8 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"os"
+
 	"github.com/6zacode-toolbox/docker-agent/internal/controller"
 	"github.com/6zacode-toolbox/docker-agent/internal/logutils"
 	"github.com/6zacode-toolbox/docker-agent/pkg/crdtools"
@@ -25,7 +27,11 @@ var composeRunnerCmd = &cobra.Command{
 		}
 		logutils.Logger.Info("Execute Agent")
 		logutils.Logger.Info(crdConfig.APIVersion)
-		controller.ExecuteDockerComposeRunner(crdConfig)
+		if os.Getenv("ACTION") == "down" {
+			controller.ExecuteDockerComposeRunnerDown(crdConfig)
+		} else {
+			controller.ExecuteDockerComposeRunnerUp(crdConfig)
+		}
 	},
 }
 
