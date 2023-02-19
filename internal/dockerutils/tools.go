@@ -93,6 +93,7 @@ func ExecuteCompose() (docker.DockerComposeRunnerStatus, error) {
 
 	result := docker.DockerComposeRunnerStatus{
 		ComposeStatus: newStatus,
+		Instanced:     true,
 	}
 	return result, nil
 

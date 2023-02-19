@@ -22,6 +22,7 @@ func ExecuteAgent(crd *crdtools.CRDConfig) error {
 	status := &docker.DockerHostStatus{
 		Containers: dockerPS,
 		DockerHost: dockerInfo,
+		Instanced:  true,
 	}
 
 	payload, err := vo.FromDockerHostStatus(status)
